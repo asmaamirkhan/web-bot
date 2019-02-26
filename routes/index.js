@@ -2,7 +2,6 @@ var express = require("express");
 var router = express.Router();
 const rp = require("request-promise");
 const cheerio = require("cheerio");
-//const $ = cheerio.load('<i class="fa fa-phone"></i>');
 
 router.post("/", function(req, res, next) {
   console.log("hi");
@@ -10,7 +9,6 @@ router.post("/", function(req, res, next) {
   rp(url)
     .then(function(html) {
       console.log("hi");
-      //success!
       //console.log($('big > i', html).length);
       const $ = cheerio.load(html);
       let nums = [];
@@ -18,9 +16,9 @@ router.post("/", function(req, res, next) {
       for (let i = 0; i < $("i").length; i++) {
         if ($("i")[i].attribs.class == "fa fa-phone") {
           let temp = $("i")[i].next.data;
-          temp = temp.split('\t').join('');
-          temp = temp.split('\n').join('');
-          temp = temp.split(' ').join('');
+          temp = temp.split("\t").join("");
+          temp = temp.split("\n").join("");
+          temp = temp.split(" ").join("");
 
           nums.push(temp);
         }
@@ -66,7 +64,6 @@ router.post("/", function(req, res, next) {
     .catch(function(err) {
       console.log(err);
       res.json(err);
-      //handle error
     });
 });
 
